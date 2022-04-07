@@ -20,10 +20,18 @@ class calificaciones:
             for j in range(len(self.lista[i])):
                 if self.lista[i][j] == '':
                     self.lista[i][j] = 0
+        self.lista[0].append('Nota final')
+        return self.lista
+    
+    def nota_final(self):
+        self.mejorar()
+        for i in range(1, len(self.lista)):
+            nota = 0.3 * float(self.lista[i][3]) +  0.3 * float(self.lista[i][4]) +  0.4 * float(self.lista[i][7])
+            self.lista[i].append(nota)
         return self.lista
 
     def crear_diccionario(self):
-        self.mejorar()
+        self.nota_final()
         for i in range(len(self.lista)):
             self.lista_de_dic.append(dict(zip(self.lista[0], self.lista[i])))
         del self.lista_de_dic[0]
@@ -34,14 +42,7 @@ class calificaciones:
         for i in range(len(self.lista_de_dic)):
             print(self.lista_de_dic[i])
 
-    def nota_final(self):
-        self.mejorar()
-        del self.lista[0]
-        for i in range(len(self.lista)):
-            nota = 0.3 * float(self.lista[i][3]) +  0.3 * float(self.lista[i][4]) +  0.4 * float(self.lista[i][7])
-            self.lista[i].append(nota)
-        return self.lista
+        
 
 ejr = calificaciones()
-ejr.nota_final()
-print(ejr.lista)
+ejr.imprimir()
