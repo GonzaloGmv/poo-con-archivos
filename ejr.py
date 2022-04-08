@@ -42,7 +42,5 @@ class calificaciones:
         for i in range(len(self.lista_de_dic)):
             print(self.lista_de_dic[i])
 
-        
-
 ejr = calificaciones()
 ejr.imprimir()
