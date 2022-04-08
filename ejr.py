@@ -3,9 +3,17 @@ class calificaciones:
         f = open('calificaciones.csv', 'r', encoding="utf-8")
         lista = []
         lista_de_dic = []
+        aprobados = []
+        suspensos = []
+        dic_aprobados = []
+        dic_suspensos = []
         self.f = f
         self.lista = lista
         self.lista_de_dic = lista_de_dic
+        self.aprobados = aprobados
+        self.suspensos = suspensos
+        self.dic_aprobados = dic_aprobados
+        self.dic_suspensos = dic_suspensos
     
     def crear_lista(self):
         for i in self.f:
@@ -30,17 +38,38 @@ class calificaciones:
             self.lista[i].append(nota)
         return self.lista
 
-    def crear_diccionario(self):
+    def aprobado(self):
+        for i in range(1, len(self.lista)):
+            if self.lista[i][2] >= '75%' and float(self.lista[i][3]) >= 4 and float(self.lista[i][4]) >= 4 and float(self.lista[i][7]) >= 4 and float(self.lista[i][9]) >= 5:
+                self.aprobados.append(self.lista[i])
+            else:
+                self.suspensos.append(self.lista[i])
+        return self.aprobados, self.suspensos
+
+    def diccionario_alumnos(self):
         self.nota_final()
         for i in range(len(self.lista)):
             self.lista_de_dic.append(dict(zip(self.lista[0], self.lista[i])))
         del self.lista_de_dic[0]
         return self.lista_de_dic
     
-    def imprimir(self):
-        self.crear_diccionario()
-        for i in range(len(self.lista_de_dic)):
-            print(self.lista_de_dic[i])
+    def diccionario_aprobados(self):
+        self.aprobado()
+        for i in range(len(self.aprobados)):
+            self.dic_aprobados.append(dict(zip(self.lista[0], self.aprobados[i])))
+        return self.aprobados
+
+    def diccionario_suspensos(self):
+        self.aprobado()
+        for i in range(len(self.suspensos)):
+            self.dic_suspensos.append(dict(zip(self.lista[0], self.suspensos[i])))
+        return self.suspensos
+
 
 ejr = calificaciones()
-ejr.imprimir()
+print("Estos son todos los alumnos")
+print(ejr.diccionario_alumnos(), '\n')
+print("Aprobados:")
+print(ejr.diccionario_aprobados(), '\n')
+print("Suspensos:")
+print(ejr.diccionario_suspensos())
