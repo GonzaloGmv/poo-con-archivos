@@ -57,19 +57,9 @@ class calificaciones:
         self.aprobado()
         for i in range(len(self.aprobados)):
             self.dic_aprobados.append(dict(zip(self.lista[0], self.aprobados[i])))
-        return self.aprobados
+        return self.dic_aprobados
 
     def diccionario_suspensos(self):
-        self.aprobado()
         for i in range(len(self.suspensos)):
             self.dic_suspensos.append(dict(zip(self.lista[0], self.suspensos[i])))
-        return self.suspensos
-
-
-ejr = calificaciones()
-print("Estos son todos los alumnos")
-print(ejr.diccionario_alumnos(), '\n')
-print("Aprobados:")
-print(ejr.diccionario_aprobados(), '\n')
-print("Suspensos:")
-print(ejr.diccionario_suspensos())
+        return self.dic_suspensos
